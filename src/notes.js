@@ -5,14 +5,15 @@ export const createNewNote=async(note,tags)=>{
     const notes=data.notes;
     const newNote={
         content:note,
-        id:Date.now(),tags
+        id:Date.now(),
+        tags
     }
     await insertDB(newNote);
     return newNote;
 }
 
 export const getAllNotes=async()=>{
-    const {notes}=await getDB;
+    const {notes}=await getDB()
     return notes;
 }
 
@@ -26,7 +27,7 @@ export const removeNote=async(id)=>{
     const {notes}=await getDB();
     const match=notes.find((note)=>(note.id===id));
     if(match){
-        const filterdArray= notes.filter((note)=>(note.id!==id));
+        const filteredArray= notes.filter((note)=>(note.id!==id));
         await saveDB({notes:filteredArray});
         return id;
     }
