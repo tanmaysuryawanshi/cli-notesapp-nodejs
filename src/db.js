@@ -1,5 +1,6 @@
 import fs from "node:fs/promises"
-const DB_PATH=new URL('../db.json',import.meta.url).pathname;
+import path from "node:path";
+const DB_PATH=path.resolve('db.json');
 export const getDB= async()=>{
     const db=await fs.readFile(DB_PATH,'utf-8');
     return JSON.parse(db);
@@ -11,8 +12,16 @@ export const saveDB=async (db)=>{
 }
 
 export const insertDB= async (note)=>{
-    const db=await getDB();
-    db.notes.push(note);
-    await saveDB(db);
+    try{
+        console.log("insertion start");
+        const db=await getDB();
+        console.log("got db");
+        db.notes.push(note);
+        await saveDB(db);
+        console.log("pushed and saved");
+    }
+   catch(e){
+    console.log(e);
+   }
     return note;
 }

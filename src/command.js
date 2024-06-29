@@ -1,5 +1,6 @@
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
+import { createNewNote } from './notes.js'
 
 
 yargs(hideBin(process.argv))
@@ -9,7 +10,8 @@ yargs(hideBin(process.argv))
       type: 'string'
     })
   }, async (argv) => {
-    
+   await createNewNote(argv['note']);
+
   })
   .option('tags', {
     alias: 't',
