@@ -64,16 +64,6 @@ console.log(chalk.blue(doneText));
     console.log("\n"+chalk.bgBlueBright.redBright.underline("removed item of id"+argv.id))
 
   })
-  .command('web [port]', 'launch website to see notes', yargs => {
-    return yargs
-      .positional('port', {
-        describe: 'port to bind on',
-        default: 5000,
-        type: 'number'
-      })
-  }, async (argv) => {
-    
-  })
   .command('clean', 'remove all notes', () => {}, async (argv) => {
     console.log(chalk.bgRed("deleteing all notes"))
     removeAllNotes()
